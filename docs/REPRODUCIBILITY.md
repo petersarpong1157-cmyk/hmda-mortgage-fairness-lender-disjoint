@@ -26,3 +26,9 @@ This repository is a *partial documentary and result-verification archive*; a fu
 ## Published supporting R scripts (October 2026)
 
 The `R/` directory includes saved manifest audits, final preprocessing, architecture and frozen-checkpoint inference/verification scripts. They are not standalone: set `HMDA_BASE_DIR` to the local project directory and supply `LOCKED_FINAL_PROTOCOL.rds`, checkpoints, frozen manifest and recovered test application files from an authorized local environment. Previous preprocessing variants were intentionally omitted; `03_preprocessing.R` is the final version handling both actual missing values and categorical `NA` text. No complete raw-cohort reconstruction or original end-to-end training release is claimed.
+
+## Independently executable public verification
+
+The public-table check `R/verify_public_results.R` uses only base R and four published aggregate CSV files. GitHub Actions successfully executed it on 2026-10-23: [verification run 40031779315](https://github.com/petersarpong1157-cmyk/hmda-mortgage-fairness-lender-disjoint/actions/runs/40031779315). It checks reported point estimates, related fairness and Brier-score differences, and consistency of bootstrap confidence-interval flags. This verifies **internal mathematical consistency only**; it does not regenerate bootstraps or reproduce original training or inference.
+
+The saved local R package versions are listed in [R_ENVIRONMENT.md](R_ENVIRONMENT.md). A lockfile representing an independently verified end-to-end environment has not been published.
