@@ -50,7 +50,8 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [Local experiment manifest](docs/DTI_Excluded_Artifact_Manifest.csv) — filenames and hashes for locally archived artifacts, not the underlying files
 - [Reproducibility](docs/REPRODUCIBILITY.md) — verification status and limitations
 - [HMDA data access](docs/DATA_ACCESS.md) — source and filter documentation
-- [R audit and frozen-model inference scripts](R/) — six reviewed scripts plus the previously published summary check; require external protocol/checkpoint files
+- [R audit and frozen-model inference scripts](R/) — supporting scripts, some requiring external protocol/checkpoint files
+- [Public aggregate verification](R/verify_public_results.R) — base-R consistency checks on four published tables; run `Rscript R/verify_public_results.R` from the repository root
 - [Local checkpoint integrity manifest](docs/ARTIFACT_CHECKSUMS.md)
 - [Upload checklist](UPLOAD_CHECKLIST.md)
 - [MIT license](LICENSE) — applies to original repository code/documentation where copyrightable; not third-party HMDA records
