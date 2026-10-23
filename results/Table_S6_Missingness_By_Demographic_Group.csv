@@ -1,0 +1,55 @@
+Dimension,Group,Variable,N,Missing,Missing_pct
+derived_race,White,loan_amount,168348,0,0
+derived_race,Asian,loan_amount,24794,0,0
+derived_race,Race Not Available,loan_amount,32227,0,0
+derived_race,Black or African American,loan_amount,10685,0,0
+derived_race,Joint,loan_amount,6702,0,0
+derived_race,American Indian or Alaska Native,loan_amount,1074,0,0
+derived_race,Native Hawaiian or Other Pacific Islander,loan_amount,263,0,0
+derived_race,2 or more minority races,loan_amount,360,0,0
+derived_race,Free Form Text Only,loan_amount,10,0,0
+derived_race,White,income,168348,2653,1.57590229762159
+derived_race,Asian,income,24794,978,3.94450270226668
+derived_race,Race Not Available,income,32227,470,1.45840444347907
+derived_race,Black or African American,income,10685,161,1.5067852129153
+derived_race,Joint,income,6702,109,1.6263801850194
+derived_race,American Indian or Alaska Native,income,1074,25,2.32774674115456
+derived_race,Native Hawaiian or Other Pacific Islander,income,263,6,2.28136882129278
+derived_race,2 or more minority races,income,360,10,2.77777777777778
+derived_race,Free Form Text Only,income,10,0,0
+derived_race,White,loan_term,168348,67,0.0397985126048424
+derived_race,Asian,loan_term,24794,2,0.00806646769379689
+derived_race,Race Not Available,loan_term,32227,46,0.142737456170292
+derived_race,Black or African American,loan_term,10685,32,0.299485259709874
+derived_race,Joint,loan_term,6702,3,0.044762757385855
+derived_race,American Indian or Alaska Native,loan_term,1074,2,0.186219739292365
+derived_race,Native Hawaiian or Other Pacific Islander,loan_term,263,0,0
+derived_race,2 or more minority races,loan_term,360,0,0
+derived_race,Free Form Text Only,loan_term,10,0,0
+derived_race,White,applicant_age,168348,0,0
+derived_race,Asian,applicant_age,24794,0,0
+derived_race,Race Not Available,applicant_age,32227,0,0
+derived_race,Black or African American,applicant_age,10685,0,0
+derived_race,Joint,applicant_age,6702,0,0
+derived_race,American Indian or Alaska Native,applicant_age,1074,0,0
+derived_race,Native Hawaiian or Other Pacific Islander,applicant_age,263,0,0
+derived_race,2 or more minority races,applicant_age,360,0,0
+derived_race,Free Form Text Only,applicant_age,10,0,0
+derived_race,White,state_code,168348,1045,0.620737995105377
+derived_race,Asian,state_code,24794,8,0.0322658707751876
+derived_race,Race Not Available,state_code,32227,295,0.915381512396438
+derived_race,Black or African American,state_code,10685,139,1.30088909686476
+derived_race,Joint,state_code,6702,32,0.477469412115786
+derived_race,American Indian or Alaska Native,state_code,1074,14,1.30353817504656
+derived_race,Native Hawaiian or Other Pacific Islander,state_code,263,2,0.760456273764259
+derived_race,2 or more minority races,state_code,360,2,0.555555555555556
+derived_race,Free Form Text Only,state_code,10,0,0
+derived_race,White,debt_to_income_ratio,168348,3407,2.02378406633877
+derived_race,Asian,debt_to_income_ratio,24794,1164,4.69468419778979
+derived_race,Race Not Available,debt_to_income_ratio,32227,810,2.51342042386819
+derived_race,Black or African American,debt_to_income_ratio,10685,261,2.44267664950866
+derived_race,Joint,debt_to_income_ratio,6702,132,1.96956132497762
+derived_race,American Indian or Alaska Native,debt_to_income_ratio,1074,44,4.09683426443203
+derived_race,Native Hawaiian or Other Pacific Islander,debt_to_income_ratio,263,8,3.04182509505703
+derived_race,2 or more minority races,debt_to_income_ratio,360,13,3.61111111111111
+derived_race,Free Form Text Only,debt_to_income_ratio,10,0,0
