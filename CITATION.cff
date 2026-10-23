@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use the supporting research materials in this repository, please cite this repository. Cite the research article separately if and when it is published."
+type: software
+title: "HMDA Mortgage Fairness: Lender-Disjoint Evaluation Reproducibility Materials"
+authors:
+  - family-names: Sarpong
+    given-names: Peter
+repository-code: "https://github.com/petersarpong1157-cmyk/hmda-mortgage-fairness-lender-disjoint"
+date-released: 2026-10-23
+license: MIT
