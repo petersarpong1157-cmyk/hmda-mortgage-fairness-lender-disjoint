@@ -1,0 +1,572 @@
+MANUSCRIPT TEXT ACCESS COPY — extracted from reviewed Word document.
+This plain-text version is provided for transparency; it does not preserve Word formatting, embedded figures, or table layout. See the four figure PDFs at the repository root. The reviewed Word file remains the authoritative formatted manuscript. This is a working research draft, not a peer-reviewed publication.
+
+Targeted Fairness Regularization and Multidimensional Calibration Trade-offs in Mortgage Decision Prediction: Evidence from Unseen U.S. Lenders
+
+Lender-Disjoint Evaluation of Fairness-Aware Mortgage Prediction: Cross-Demographic Calibration Trade-offs and Reproducibility Challenges
+Manuscript Version 8 | Missing-data sensitivity integrated | 23 October 2026
+Peter Sarpong | Independent Researcher | Gaithersburg, Maryland 20886, USA | Corresponding author: peter.sarpong1157@gmail.com
+Editorial status: Research revision with verified missingness and complete-case sensitivity. The public supporting-code repository and original research figures have been verified, but the exact official HMDA source-release identity, selected bibliography details, and journal-specific submission requirements remain under review. This draft requires final editorial checks before submission.
+Abstract
+Background: Fairness-aware prediction methods may reduce a targeted demographic disparity while worsening other calibration measures. We examine this trade-off for historical mortgage decisions, not borrower default or independently established creditworthiness.
+Methods: From 2025 Home Mortgage Disclosure Act (HMDA) records, an eligible analytical population of 2,034,914 applications from 2,562 lenders was identified. Lenders were divided into separate training, validation and test partitions. The held-out evaluation included 244,463 applications from 386 lenders. We compared XGBoost, an unregularized deep neural network (DNN), and two DNN checkpoints trained with Black–White mean-residual fairness penalties (λ = 2 and λ = 10). Performance metrics included AUROC, average precision, Brier score and calibration-in-the-large gaps. Paired lender-clustered bootstrap inference quantified selected differences.
+Results: On 244,463 applications from 386 held-out lenders, the standard DNN achieved AUROC 0.7812 and Brier 0.041341; λ=2 fairness regularization reduced the absolute Black–White residual gap by 0.8472 percentage points (95% paired lender-cluster bootstrap CI 0.6989–1.0448). Only Black or African American applicants showed an improvement surviving the simultaneous subgroup procedure across 14 selected categories. In a separately trained DTI-excluded sensitivity analysis using seeds 101, 202 and 303, the targeted gap fell by 0.8596, 1.1309 and 1.4446 percentage points, respectively; all three seed-specific lender-cluster 95% intervals excluded zero, while Brier scores increased by varying amounts.
+Conclusions: Improvements in a prespecified statistical disparity can coexist with deterioration in other demographic calibration measures and probability accuracy. They support auditing rather than certification of fairness or prospective underwriting deployment. Checkpoint inference was verified, but original sampling and full training have not been completely reproduced.
+Keywords: HMDA; mortgage underwriting; algorithmic fairness; calibration-in-the-large; lender-disjoint evaluation; deep learning; reproducibility.
+1. Introduction
+Machine learning is increasingly used to describe institutional credit decisions, but historical decision prediction is not equivalent to assessing creditworthiness or determining whether decisions were lawful or fair. In mortgage lending, administrative data record the outcomes of institutional processes and include information potentially acquired during those processes. A high-performing retrospective model may therefore reproduce both economic signals and aspects of decision-making or reporting.
+Fairness-aware methods attempt to improve specified statistical criteria, including error-rate balance, group calibration and other measures. These objectives need not agree, and optimizing one metric does not imply improvements in another (Hardt et al., 2016; Chouldechova, 2017; Kleinberg et al., 2017; Pleiss et al., 2017). The distinction is especially important when the observed labels are historical approvals and denials.
+Recent mortgage studies address related questions. Bell et al. (2026) investigate interpretable learning with equalized-odds considerations; Ellis (2026) evaluates accuracy and several fairness metrics using 2024 HMDA and another credit dataset; Faccia and Itani (2026) examine historical decision prediction, calibration and group differences in Delaware. The present study therefore does not claim originality in the use of fairness-aware mortgage learning itself. Instead, it evaluates how a narrowly defined Black–White mean-residual penalty affects broader demographic calibration and predictive accuracy on entire lenders omitted from model development.
+The study asks: (1) how do frozen candidate models perform on new lenders; (2) does targeted regularization reduce Black–White calibration-in-the-large disparity; and (3) are benefits accompanied by deterioration in aggregate or other demographic calibration metrics?
+Normative premise and contribution. Optimizing agreement with historically observed mortgage decisions does not establish that those decisions are an ethically appropriate ground truth. This study treats fairness regularization as an audit intervention: it asks whether targeted adjustments improve a specified measure across held-out institutions and whether those improvements generalize across demographic reporting dimensions. The empirical contribution is the combination of lender-disjoint evaluation, multiplicity-aware subgroup diagnostics, verified frozen-checkpoint inference and a separately documented DTI-excluded sensitivity experiment. This does not imply a first-ever lender-disjoint mortgage fairness study.
+2. Related literature
+2.1. Fairness criteria and calibration
+Equalized odds and equality of opportunity compare error behavior conditional on outcomes (Hardt et al., 2016). Theoretical work has identified incompatibilities among certain statistical fairness conditions under specified assumptions (Kleinberg et al., 2017; Chouldechova, 2017), while Pleiss et al. (2017) examine calibration versus error constraints. These results motivate the multidimensional audit but do not mathematically determine the empirical sign of the penalty effects studied here.
+Our measure is calibration-in-the-large within a group: mean predicted denial probability minus that group’s observed denial rate. It does not measure conditional calibration within probability bins, equalized odds, individual-level justice, or causal discrimination.
+2.2. Mortgage learning and research gap
+Bell et al. (2026) explicitly embed a fairness criterion in an interpretable mortgage model. Ellis (2026) shows that observed associations between accuracy and fairness depend on the selected metric and dataset. Faccia and Itani (2026) emphasize auditing historical outcomes and missing financial information. Musonerwa et al. (2026) review discriminatory-pattern detection and mitigation in mortgage prediction. Against this literature, our distinctive empirical object is the joint evaluation of a targeted mean-residual penalty, weighted errors across multiple reporting dimensions, multiplicity-adjusted subgroup analysis, and a lender-disjoint test.
+2.3. Normative fairness, causality, and fair-lending context
+Group calibration-in-the-large measures agreement between predictions and recorded decisions; it does not identify the fairness of historical decisions. Causal approaches such as counterfactual fairness require explicit causal assumptions and provide a different conceptual lens (Kusner et al., 2017). The present design neither identifies individual counterfactual decisions nor tests legal discrimination.
+The U.S. Equal Credit Opportunity Act and Fair Housing Act establish relevant nondiscrimination obligations in lending. Statistical calibration changes are informative for model monitoring but are not, on their own, proof of compliance, disparate treatment, disparate impact, or remedy of historical lending disadvantage. The practical policy question is which target outcomes, trade-offs, and model uses should be considered legitimate.
+3. Data and methods
+3.1. HMDA source and sample restrictions
+The local source archive, 2025_public_lar_csv.zip (MD5 561d641e884b1b1ef94e7118e3690b89), contained 13,543,606 rows before study restrictions. The exact official snapshot-versus-dynamic release is not conclusively established from the archive filename or internal timestamp. FFIEC documentation identifies distinct static and dynamic datasets; the project records the local archive checksum and does not assign it an unverified release label.
+To reduce mortgage-product heterogeneity, the study focuses on conventional, home-purchase, first-lien, principal-residence, site-built mortgages involving one to four units. Reverse mortgages, open-end credit arrangements and business-purpose loans were excluded because their contractual and reporting characteristics are not directly comparable. For each of the three HMDA flags—reverse_mortgage, open_end_line_of_credit and business_or_commercial_purpose—an explicit code “2” (No) was required; “1111” (exempt) was not interpreted as No. Eligible outcomes were action_taken code 1 (originated), code 2 (approved but not accepted) and code 3 (denied). Codes 1 and 2 were grouped as non-denial (0), and code 3 was defined as denial (1). The resulting sample comprised 2,034,914 applications from 2,562 lenders. Reconstructed eligible application counts from the retained source matched the frozen lender-level manifest for all 2,562 lenders; because unique application identifiers were not retained, this count agreement does not demonstrate full application-level identity.
+3.2. Partitioning and development subsamples
+Lenders were separated by Legal Entity Identifier (LEI) into full train (1,530,103 applications; 1,792 lenders), validation (260,348; 384 lenders), and test (244,463; 386 lenders) partitions. The development subsamples comprised 306,013 training applications from 1,699 lenders and 78,237 validation applications from 375 lenders. Their denial prevalence was 7.441% and 7.578%, compared with full-partition rates of 7.410% and 7.637%, respectively. The original subsampling algorithm and seed were not recovered; saved training and validation records were preserved. The model seed of 101 is not evidence of an application-sampling seed.
+
+Figure 1. HMDA sample selection and lender-disjoint study design. Eligible 2025 applications and development/test partition sizes.
+3.3. Features and models
+The principal predictors were loan amount, reported income, loan term, applicant age, state and reported debt-to-income ratio (DTI). Preapproval was excluded from the main specification. Categorical factor encoding used saved training levels; the DNN design comprised 88 inputs. Missing numerical values were replaced with training-derived medians: loan amount 345,000; income 127 (in thousands of dollars); loan term 360 months. Missing state and DTI categories were encoded as “Missing”. For DNN inference the numeric variables were standardized using saved training means and standard deviations; XGBoost used unscaled numerical values with the same feature design. These different transformations were confirmed by frozen-checkpoint prediction reproduction.
+The DNN architecture consisted of a 64-unit hidden layer, ReLU activation and 0.20 dropout, followed by a 32-unit hidden layer, ReLU and 0.10 dropout, then a one-unit output; 7,809 parameters. Inference applied a sigmoid to model logits. The selected standard and λ = 2 checkpoints were associated with seed 101. The λ = 10 checkpoint arose from a separate earlier model-development experiment and is treated as a sensitivity comparator.
+3.4. Fairness objective and measures
+For individual i with observed denial indicator y_i and predicted denial probability p_i, group g calibration error is CE_g = mean_g(p_i − y_i). The signed Black–White gap is CE_Black − CE_White and the principal disparity is its absolute value. The fairness training objective combined binary cross entropy with λ × (CE_Black − CE_White)^2, calculated from eligible minibatches. The penalty targets mean residual disparity, not full conditional calibration.
+AUROC, average precision for the denial class, and Brier score measured predictive performance. Group-wise and population-weighted absolute calibration errors were secondary fairness diagnostics. The pre-specified primary fairness comparison contrasted standard DNN with λ = 2.
+3.5. Uncertainty and reproducibility
+Primary uncertainty estimates were retained from a paired 1,000-replicate bootstrap resampling lenders. Exploratory subgroup inference covered 14 demographic categories (N ≥ 500) using 2,000 joint lender-cluster bootstrap resamples and simultaneous maximum-deviation intervals. Bootstrap generation code was not fully reproduced in the present audit; the archived outputs were inspected and matched reported intervals.
+Reconstructed training and validation feature matrices agreed with the original Float32 tensors within maximum absolute differences of 4.61 × 10⁻⁶ and 1.80 × 10⁻⁶. All four archived model checkpoint MD5 hashes matched their records. Frozen inference scripts reproduced probability multisets within matched lender-and-outcome groups: maximum differences 0 for XGBoost, 1.79 × 10⁻⁷ for standard and λ = 2 DNN, and 1.19 × 10⁻⁷ for λ = 10. Original test row ordering and full training reproducibility are not claimed.
+3.6. DTI-excluded sensitivity and model-training variability
+A separate sensitivity experiment removed all DTI-derived inputs from the verified feature representation. It retained the preserved development training sample (306,013 applications), development validation sample (78,237) and held-out lender-disjoint test set (244,463 applications, 386 lenders). The model architecture was 64-ReLU-dropout(0.20), 32-ReLU-dropout(0.10), one logit output; models were trained using Adam (learning rate 0.001), minibatches of 1,024, validation Brier early stopping (patience five) and a maximum of 25 epochs. A group residual-gap penalty of weight λ=2 was compared with λ=0. R seeds 101, 202 and 303 were evaluated with matched within-seed settings. Race indicators entered the training penalty but were not input prediction features.
+The DTI-excluded protocol was newly specified: it is not a reconstruction of the training protocol for the original frozen DTI-inclusive checkpoints. In the reduced-feature experiment, the selected epochs were 14/19 (standard/fair) for seed 101, 23/17 for seed 202 and 17/12 for seed 303. The six saved checkpoints and seed-specific test predictions were preserved. For each fixed seed-specific model pair, 2,000 paired bootstrap resamples of the 386 lenders produced percentile 95% confidence intervals for absolute Black–White residual-gap reduction and Brier-score change. These intervals reflect held-out lender variation conditional on trained checkpoints, not variability across training seeds.
+3.7. Missing-data sensitivity: audit protocol and interpretation
+The original DTI-inclusive preprocessing used fixed, training-derived medians for missing numeric loan amount ($345,000), reported income (127 in HMDA thousands), and loan term (360 months), with categorical missingness explicitly encoded. The supplementary missingness audit used the recovered, row-aligned held-out test applications and preserved development samples. Missing values included actual NA, blank strings and textual NA codes. Complete-case analysis evaluated the already-trained seed-101 DTI-excluded models, not new models. Because eligibility and preprocessing can affect the distribution of missingness, all reported rates are conditional on this study’s selected samples.
+In the held-out sample of 244,463 applications, income was missing for 4,412 (1.805%), loan term for 152 (0.062%), state for 1,537 (0.629%), and DTI for 5,839 (2.389%); loan amount and applicant age had no identified missing values. Exclusion of missing values among the five non-DTI predictors retained 238,459 cases; additionally requiring observed DTI retained 235,185. Saved seed-101 predictions were verified against available recovered-test alignment keys before applying the complete-case masks. Race-specific reporting differences were audited descriptively. The recovered test extract did not include derived_ethnicity; ethnicity-specific missingness is therefore not claimed.
+4. Results
+4.1. Held-out performance
+The reserved test comprised 244,463 applications, including 15,271 denials. XGBoost had the highest AUROC (0.794687); the standard DNN had the lowest Brier score (0.041341) and marginally highest average precision (0.480510). These are directly recalculated results from the archived test probabilities.
+	Model
+	AUROC
+	Average precision
+	Brier
+	Abs. B–W gap (pp)
+
+	XGBoost B
+	0.794687
+	0.480134
+	0.041551
+	4.833122
+
+	Standard DNN
+	0.781178
+	0.480510
+	0.041341
+	4.700813
+
+	Fair DNN, λ = 2
+	0.778376
+	0.479021
+	0.041543
+	3.853615
+
+	Fair DNN, λ = 10
+	0.770676
+	0.465504
+	0.043047
+	2.266283
+
+
+Table 1. Held-out discrimination, probability accuracy, and absolute Black–White calibration-in-the-large disparity. Average precision uses tie-grouped, non-interpolated calculation.
+
+Figure 2. Predictive performance on unseen lenders. AUROC and Brier score for XGBoost and three DNN specifications; higher AUROC and lower Brier are preferable.
+4.2. Primary fairness and Brier trade-off
+Compared with standard DNN, λ = 2 reduced the absolute Black–White gap by 0.847198 percentage points (approximately 18.0%) while increasing Brier score by 0.000201658. The archived paired lender-cluster bootstrap intervals for these effects excluded zero.
+	Contrast
+	Effect
+	95% CI lower
+	95% CI upper
+
+	Reduction in abs. B–W gap (pp)
+	0.847198
+	0.698907
+	1.044830
+
+	Fair λ = 2 minus standard Brier
+	0.000201658
+	0.000003780
+	0.000422651
+
+
+Table 2. Archived paired lender-clustered bootstrap uncertainty (1,000 resamples); positive Brier difference represents a deterioration in probability accuracy.
+
+Figure 3. Targeted Black–White calibration gap versus overall probability accuracy in the held-out evaluation. The Black–White gap is an absolute difference in mean predicted-minus-observed denial rates; lower values on both axes are preferable.
+4.3. Calibration across reporting dimensions
+Targeting the Black–White disparity did not yield population-weighted improvements across reporting categories. Population-weighted absolute error for standard DNN versus λ = 2 was 1.197 versus 1.271 percentage points by race, 1.061 versus 1.155 by ethnicity, and 0.876 versus 1.037 by sex. Under λ = 10, the corresponding values were 1.572, 1.518, and 1.516 percentage points. These measures reflect historical-outcome residuals, not causal fairness.
+	Reporting dimension
+	Standard DNN
+	Fair λ = 2
+	Fair λ = 10
+
+	Race
+	1.197
+	1.271
+	1.572
+
+	Ethnicity
+	1.061
+	1.155
+	1.518
+
+	Sex
+	0.876
+	1.037
+	1.516
+
+
+Table 3. Population-weighted mean absolute group calibration error, percentage points; lower is better.
+4.4. Simultaneous subgroup inference
+Only the Black or African American group showed improvement in absolute calibration error with a simultaneous 95% interval excluding zero: +0.957604 percentage points (0.239343–1.675865). The remaining 13 simultaneous intervals included zero; some unadjusted pointwise intervals did not. Pointwise and simultaneous intervals must therefore not be conflated.
+
+Figure 4. Demographic subgroup changes in absolute calibration error, λ = 2 versus standard DNN, with unadjusted 95% confidence intervals. Positive estimates indicate improvement; simultaneous multiplicity-adjusted intervals are reported in Supplementary Table S1 and should not be inferred from this figure.
+4.5. Distribution of calibration changes across demographic groups
+Among 14 selected race, ethnicity and sex-reporting categories, absolute calibration-in-the-large error decreased for four and increased for ten under λ=2 relative to the standard DNN. For Black or African American applicants (n=10,685), absolute error decreased from 3.4756 to 2.5179 percentage points (improvement 0.9576 pp; simultaneous 95% CI 0.2393–1.6759). Hispanic or Latino applicants improved by 0.3243 pp and American Indian or Alaska Native applicants by 0.3033 pp, but these comparisons did not exclude zero after simultaneous adjustment. All four sex-reporting categories had negative point-estimate improvements; the Female category changed by −0.4098 pp, also with a simultaneous interval spanning zero.
+Exploratory Spearman rank correlations between group size and calibration improvement were −0.657 (race; six groups), −0.600 (ethnicity; four groups) and +0.400 (sex; four groups). Correlations between baseline absolute calibration error and improvement were +1.000, +0.400 and +0.800, respectively. These are unstable descriptive associations from very few overlapping categories. Because the improvement measure itself contains baseline absolute error, mathematical coupling prevents causal interpretation of these correlations.
+4.6. DTI-excluded sensitivity across three training seeds
+Retraining without DTI reduced discrimination relative to the DTI-inclusive original models, but this comparison is descriptive because the training protocols were different. For seed 101, AUROC was 0.6884 (standard) versus 0.6867 (λ=2), and Brier score was 0.0533866 versus 0.0535668. Across seeds 101, 202 and 303, targeted absolute Black–White residual-gap reductions were 0.8596 pp (95% CI 0.6376–1.0972), 1.1309 pp (0.9066–1.3699) and 1.4446 pp (1.0916–1.8204), respectively. All three paired lender-cluster bootstrap confidence intervals excluded zero.
+The corresponding fair-minus-standard Brier changes were +0.0001802 (95% CI −0.0000287–0.0004422), +0.0010560 (0.0007428–0.0014743) and +0.0010908 (0.0008277–0.0014138). Hence the targeted disparity improvement was directionally consistent among the three seeds, but the accuracy penalty was substantially variable: the seed-101 Brier interval included zero, unlike seeds 202 and 303. Intervals are seed-specific and not adjusted simultaneously across the six comparisons. Table S2 provides the complete sensitivity estimates.
+4.7. Missing-data prevalence and race-specific reporting differences
+Missingness varied by feature and analysis partition. In the 306,013-application development-training sample, missing income, loan term, state and DTI rates were 0.984%, 0.126%, 0.285% and 1.086%; in the 78,237-application development-validation sample they were 1.632%, 0.074%, 0.274% and 0.497%. Corresponding rates in the 244,463-application lender-disjoint test sample were 1.805%, 0.062%, 0.629% and 2.389%. No loan-amount or applicant-age missingness was detected under the specified rules. These are observed descriptive differences in reporting completeness, not evidence about why fields are missing.
+Missing income and DTI were more frequent in the Asian reporting category (3.945% and 4.695%, respectively; N=24,794) than the White category (1.576% and 2.024%; N=168,348). Missing state was recorded for 1.301% of Black or African American applicants (N=10,685), compared with 0.621% of White applicants. Estimates for very small racial categories should be interpreted cautiously. There is no evidence here that reporting patterns are causally attributable to race, or that missing-data handling explains the observed fairness trade-off. Ethnicity-specific missingness could not be evaluated with the available recovered extract.
+4.8. Complete-case evaluation of frozen DTI-excluded models
+The seed-101 DTI-excluded model pair was re-evaluated on subsets without missing features; parameters were not refitted. Requiring completeness in the non-DTI model inputs retained 238,459/244,463 (97.544%) held-out applications, with the absolute Black–White gap decreasing from 5.914 pp for the standard model to 5.094 pp for the fair model, an improvement of 0.820 pp. Under the stricter complete-case definition additionally requiring observed DTI, 235,185/244,463 (96.205%) cases remained and the gap reduction was 0.817 pp (5.831 to 5.014). In the entire test sample the corresponding improvement was 0.860 pp (6.175 to 5.316).
+The fair-minus-standard Brier changes were +0.0002634 without requiring DTI and +0.0002612 when DTI was also required, compared with +0.0001802 on all applications. No complete-case confidence intervals were computed. Because complete-case screening changes the sample composition, these findings demonstrate persistence in restricted subsets rather than establish that imputation is unbiased or causally irrelevant.
+5. Discussion
+The primary finding is a nonuniform fairness trade-off: λ = 2 improved its targeted mean-residual disparity on unseen lenders while slightly increasing the Brier score and worsening population-weighted group calibration across several reporting dimensions. The additional missingness audit revealed race-specific differences in observed reporting completeness, notably for income and DTI; the magnitude and causes of any resulting fairness effects were not identified. The seed-101 targeted gap reduction persisted in complete-case subsets, but these analyses neither retrained models nor removed selection bias.
+Results relate to historical institution decisions. In particular, reported DTI is strongly associated with the historical decision and may not be available in the same form at an earlier operational decision point. The DTI-inclusive design is best described as retrospective decision reproduction, not a prospective default or underwriting model.
+Lender-disjoint testing improves the evaluation of institutional transfer within 2025 but does not establish temporal generalization. The remaining uncertainty in original development sampling and full training should constrain claims about end-to-end reproducibility. Statistical fairness measures likewise cannot identify lawful versus unlawful causal treatment without additional information and designs.
+5.1. Ethical interpretation and implications for lenders and regulators
+Historical denial decisions should not be equated with ethically or legally justified ground truth. A model may become more faithful to one measured parity criterion while remaining anchored to past institutional practices; reducing the Black–White signed residual gap, in particular, does not guarantee improvements for all groups or applicants. Fairness regularization is therefore evaluated here as a diagnostic or audit intervention, not as a sufficient basis for mortgage model deployment.
+Institutions auditing decision-prediction models should examine targeted and untargeted group metrics together; disclose which groups and outcome labels define the optimization objective; evaluate lender and time transfer where possible; document missingness and reporting-sensitive fields; and review error patterns before deployment. The subgroup estimates require particular care: although several point estimates worsened, only the Black group had a simultaneously supported absolute calibration improvement in the present subset. A shift in model residuals is not direct evidence of changed applicant outcomes or legal discrimination.
+The asymmetric subgroup changes motivate investigation of multi-group fairness objectives. A penalty that jointly evaluates errors across several racial, ethnicity and sex-reporting groups might reduce the risk of optimizing only one pairwise contrast; however, objectives can conflict, and such penalties require explicit decisions about group weights, intersecting categories, sample sizes and acceptable accuracy costs. We did not estimate such a model, so mitigation of cross-demographic trade-offs remains a hypothesis for future testing. Alternative outcome definitions, external validation and decision-stage data could also be explored. The present experiments do not evaluate a multi-group objective.
+6. Limitations
+The analysis uses one reporting year and a selected eligibility population; results need not transfer to later years, excluded products or new lenders beyond the evaluated set. Historical action labels do not directly establish borrower creditworthiness, decision legality or fairness. Reporting-sensitive DTI, differing demographic missingness and complete-case selection constrain external and prospective interpretations. The recovered test extract cannot support an ethnicity-specific missingness analysis. The original development sampling and full original model-training pipeline were not independently reconstructed, though frozen inference and new DTI-excluded sensitivity artifacts were separately audited.
+The reduced-feature robustness test relies on three training seeds using the same preserved development sample. Bootstrap intervals are computed separately conditional on each fitted pair and do not quantify the distribution of retraining effects or adjust jointly for multiple seed comparisons. DTI removal is not a prospective-validity guarantee: other HMDA fields may also be reporting-sensitive. The artifact manifest verifies file presence, nonzero size and recorded MD5 at audit time, not independent end-to-end regeneration.
+7. Conclusion
+In 244,463 applications from 386 previously unseen lenders, targeting Black–White mean residual disparity reduced the absolute calibration gap by 0.847 percentage points but was accompanied by a modest Brier deterioration and no uniform improvement in broader demographic calibration. The evidence favors reporting multiple fairness metrics, clearly defining outcome labels, and using institutionally separate evaluation data. It does not demonstrate improved creditworthiness assessment or reduced unlawful discrimination.
+7.1. Interpretation for ethical model governance
+In the primary DTI-inclusive analysis, targeting a Black–White mean-residual disparity reduced that disparity on unseen lenders without delivering universal demographic calibration gains. A separately trained DTI-excluded experiment showed directionally consistent targeted improvements across three seeds, but Brier-score costs varied. Thus, the contribution is an institutionally separated, multi-metric audit of what fairness optimization can and cannot establish from historical mortgage decisions, not a claim that regularization cures lending discrimination or makes a system fit for deployment.
+Data, code, and declarations
+Data: Public modified 2025 HMDA LAR data distributed through the FFIEC HMDA Platform. Local ZIP filename, checksum, and extraction date are documented; exact official release type remains unverified. Data are subject to source terms and redistribution review.
+Code availability: Supporting R scripts, aggregate tables, original figures, and reproducibility documentation are public at https://github.com/petersarpong1157-cmyk/hmda-mortgage-fairness-lender-disjoint . This is a partial research archive, not complete independently reproduced training. Checkpoints, original protocols, lender manifest, and application-level predictions remain locally archived; the manuscript is intentionally excluded from GitHub. No archival DOI has been verified. Underlying HMDA redistribution remains subject to source terms.
+Funding: The author received no funding for this research. Competing interests: The author declares no competing interests. Ethics: This retrospective analysis used publicly released, modified HMDA administrative records; journal-specific ethics and data-use declaration requirements remain to be confirmed. Author contributions: Peter Sarpong conducted the research and is responsible for the analysis and manuscript. Generative AI use: OpenAI ChatGPT assisted with R coding, statistical analysis, and manuscript drafting and editing. The author reviewed and verified the work and takes responsibility for the final manuscript.
+Supplementary computation: The DTI-excluded experiment preserved six training checkpoints, three held-out prediction files, training protocol and history, three performance/uncertainty tables and an MD5 manifest of 14 nonempty artifacts. Seed-specific lender-cluster bootstrap calculations were numerically verified against independently computed point estimates. These audits do not recover original DTI-inclusive sampling seed or reproduce the complete initial model training.
+Missing-data audit status
+Status: completed for six variables in development-training, development-validation and held-out samples; additionally completed for race-specific missingness in held-out applications and seed-101 frozen-model complete-case sensitivity. Predictions matched available test alignment keys, although this does not independently verify raw data lineage. Detailed results are provided in Supplementary Tables S4–S6. Ethnicity-specific missingness was not computed because the recovered test extract did not contain derived_ethnicity.
+Figure 4 editorial note: The figure uses unadjusted subgroup intervals. Only the Black or African American improvement excludes zero after the separate simultaneous inference adjustment reported in Supplementary Table S1; do not infer simultaneous significance from the figure itself.
+References
+Bell, S., Kakhbod, A., Nazemi, A., Stanton, R., & Wallace, N. (2026). Fairness by design: Machine learning and interpretable mortgage lending. Working paper. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6221578
+Chouldechova, A. (2017). Fair prediction with disparate impact: A study of bias in recidivism prediction instruments. Big Data, 5(2), 153–163. https://doi.org/10.1089/big.2016.0047
+Ellis, C. (2026). The fairness illusion? A cross-dataset audit of accuracy and demographic bias in credit scoring based on machine learning. Journal of Risk and Financial Management, 19(9), 674. https://doi.org/10.3390/jrfm19090674
+Faccia, A., & Itani, R. (2026). Responsible AI in historical mortgage decision prediction: Calibration, group differences, and audit evidence in Delaware. FinTech, 5(4), 97. https://doi.org/10.3390/fintech5040097
+Hardt, M., Price, E., & Srebro, N. (2016). Equality of opportunity in supervised learning. Advances in Neural Information Processing Systems, 29. https://research.google/pubs/equality-of-opportunity-in-supervised-learning/
+Kleinberg, J., Mullainathan, S., & Raghavan, M. (2017). Inherent trade-offs in the fair determination of risk scores. 8th Innovations in Theoretical Computer Science Conference. https://doi.org/10.4230/LIPIcs.ITCS.2017.43
+Musonerwa, P. S., Uhoranishema, B., Mugisha, R. N., Iradukunda, P., Mpozenzi, P., & Nuwayo, E. (2026). Machine learning algorithms for detecting and mitigating discriminatory patterns in mortgage lending: A systematic review. Discover Data, 4, 12. https://doi.org/10.1007/s44248-026-00108-z
+Pleiss, G., Raghavan, M., Wu, F., Kleinberg, J., & Weinberger, K. Q. (2017). On fairness and calibration. Advances in Neural Information Processing Systems, 30. https://papers.nips.cc/paper_files/paper/2017/hash/b8b9c74ac526fffbeb2d39ab038d1cd7-Abstract.html
+Federal Financial Institutions Examination Council (FFIEC). (2026). Snapshot national loan-level dataset: 2025. https://ffiec.cfpb.gov/data-publication/snapshot-national-loan-level-dataset
+Consumer Financial Protection Bureau (CFPB). (2026, March 31). 2025 HMDA data on mortgage lending now available. https://www.consumerfinance.gov/about-us/newsroom/2025-hmda-data-on-mortgage-lending-now-available/
+Kusner, M. J., Loftus, J. R., Russell, C., & Silva, R. (2017). Counterfactual fairness. Advances in Neural Information Processing Systems, 30. https://papers.neurips.cc/paper/2017/hash/a486cd07e4ac3d270571622f4f316ec5-Abstract.html
+Consumer Financial Protection Bureau. Equal Credit Opportunity Act (ECOA): consumer and lender resources. https://www.consumerfinance.gov/consumer-tools/credit-cards/answers/key-terms/equal-credit-opportunity-act/ [Verify applicable version and journal citation format before submission].
+Supplementary Table S1. Demographic calibration improvements
+Improvement = absolute calibration error, standard DNN minus λ = 2 DNN (pp). Positive values indicate lower absolute error under λ = 2. Pointwise CIs are unadjusted; simultaneous CIs adjust across 14 exploratory comparisons.
+	Dimension
+	Group
+	N
+	Improve. pp
+	Pointwise 95% CI
+	Simultaneous 95% CI
+
+	Ethnicity
+	Not available
+	30694
+	-0.173
+	[-0.255, 0.226]
+	[-0.891, 0.546]
+
+	Ethnicity
+	Hispanic or Latino
+	25025
+	0.324
+	[-0.386, 0.408]
+	[-0.394, 1.043]
+
+	Ethnicity
+	Joint
+	7252
+	-0.047
+	[-0.107, -0.004]
+	[-0.766, 0.671]
+
+	Ethnicity
+	Not Hispanic or Latino
+	181459
+	-0.140
+	[-0.219, -0.069]
+	[-0.859, 0.578]
+
+	Race
+	American Indian or Alaska Native
+	1074
+	0.303
+	[-0.363, 0.486]
+	[-0.415, 1.022]
+
+	Race
+	Asian
+	24794
+	-0.164
+	[-0.284, 0.215]
+	[-0.883, 0.554]
+
+	Race
+	Black or African American
+	10685
+	0.958
+	[0.760, 1.187]
+	[0.239, 1.676]
+
+	Race
+	Joint
+	6702
+	0.001
+	[-0.061, 0.047]
+	[-0.717, 0.720]
+
+	Race
+	Not available
+	32227
+	-0.179
+	[-0.268, 0.231]
+	[-0.897, 0.539]
+
+	Race
+	White
+	168348
+	-0.110
+	[-0.186, -0.046]
+	[-0.829, 0.608]
+
+	Sex
+	Female
+	51320
+	-0.410
+	[-0.524, 0.188]
+	[-1.128, 0.308]
+
+	Sex
+	Joint
+	103319
+	-0.025
+	[-0.089, 0.033]
+	[-0.743, 0.694]
+
+	Sex
+	Male
+	76851
+	-0.182
+	[-0.260, 0.212]
+	[-0.901, 0.536]
+
+	Sex
+	Not available
+	12973
+	-0.124
+	[-0.212, 0.181]
+	[-0.843, 0.594]
+
+
+Editorial checklist (remove before submission): Verify exact HMDA release and bibliography; confirm figure source exports, journal-specific declarations, and archived seed-101 bootstrap interval variants. Public GitHub code repository verified; original model training not independently reproduced. No complete-case bootstrap intervals were computed.
+Supplementary Table S2. DTI-excluded model sensitivity across training seeds
+Effects are fairness-regularized (λ=2) minus standard (λ=0), except the gap-reduction metric, defined as standard minus fair absolute Black–White mean-residual gap. Bootstrap intervals are paired lender-cluster percentile 95% intervals with 2,000 replicates per seed; they are pointwise, not simultaneous.
+	Seed
+	Std Brier
+	Fair Brier
+	Gap reduction pp [95% CI]
+	Brier change [95% CI]
+	Best epochs std/fair
+
+	101
+	0.05338661
+	0.05356683
+	0.8596 [0.6376, 1.0972]
+	0.0001802 [−0.0000287, 0.0004422]
+	14 / 19
+
+	202
+	0.05280460
+	0.05386057
+	1.1309 [0.9066, 1.3699]
+	0.0010560 [0.0007428, 0.0014743]
+	23 / 17
+
+	303
+	0.05290528
+	0.05399608
+	1.4446 [1.0916, 1.8204]
+	0.0010908 [0.0008277, 0.0014138]
+	17 / 12
+
+
+Supplementary Table S4. Missingness by candidate predictor and partition
+Missing defined as native NA, empty string or literal NA; percentages use the displayed partition denominator. Development sets refer to preserved development samples, not full source partitions.
+	Partition
+	N
+	Variable
+	Missing N
+	Missing %
+
+	Development train
+	306013
+	Loan amount
+	0
+	0.000
+
+	Development train
+	306013
+	Income
+	3010
+	0.984
+
+	Development train
+	306013
+	Loan term
+	387
+	0.126
+
+	Development train
+	306013
+	Applicant age
+	0
+	0.000
+
+	Development train
+	306013
+	State
+	872
+	0.285
+
+	Development train
+	306013
+	DTI
+	3322
+	1.086
+
+	Development validation
+	78237
+	Loan amount
+	0
+	0.000
+
+	Development validation
+	78237
+	Income
+	1277
+	1.632
+
+	Development validation
+	78237
+	Loan term
+	58
+	0.074
+
+	Development validation
+	78237
+	Applicant age
+	0
+	0.000
+
+	Development validation
+	78237
+	State
+	214
+	0.274
+
+	Development validation
+	78237
+	DTI
+	389
+	0.497
+
+	Held-out test
+	244463
+	Loan amount
+	0
+	0.000
+
+	Held-out test
+	244463
+	Income
+	4412
+	1.805
+
+	Held-out test
+	244463
+	Loan term
+	152
+	0.062
+
+	Held-out test
+	244463
+	Applicant age
+	0
+	0.000
+
+	Held-out test
+	244463
+	State
+	1537
+	0.629
+
+	Held-out test
+	244463
+	DTI
+	5839
+	2.389
+
+
+Supplementary Table S5. Race-specific missingness in the held-out test
+Held-out 2025 HMDA applications (N=244,463). Percentages are unadjusted descriptions of reporting completeness; small-group rates are unstable.
+	Race category
+	N
+	Income %
+	Term %
+	State %
+	DTI %
+
+	White
+	168348
+	1.576
+	0.040
+	0.621
+	2.024
+
+	Race not available
+	32227
+	1.458
+	0.143
+	0.915
+	2.513
+
+	Asian
+	24794
+	3.945
+	0.008
+	0.032
+	4.695
+
+	Black or African American
+	10685
+	1.507
+	0.299
+	1.301
+	2.443
+
+	Joint
+	6702
+	1.626
+	0.045
+	0.477
+	1.970
+
+	American Indian or Alaska Native
+	1074
+	2.328
+	0.186
+	1.304
+	4.097
+
+	2 or more minority races
+	360
+	2.778
+	0.000
+	0.556
+	3.611
+
+	Native Hawaiian or Other Pacific Islander
+	263
+	2.281
+	0.000
+	0.760
+	3.042
+
+	Free Form Text Only
+	10
+	0.000
+	0.000
+	0.000
+	0.000
+
+
+Supplementary Table S6. Complete-case sensitivity of seed-101 frozen DTI-excluded models
+Same two trained models evaluated on subsets with different completeness restrictions; no retraining or complete-case uncertainty intervals. Positive gap reduction means improvement; positive Brier change means worse probabilistic accuracy.
+	Test subset
+	N retained
+	Std |gap| pp
+	Fair |gap| pp
+	Reduction pp
+	Brier Δ
+
+	All held-out
+	244463
+	6.175225
+	5.315639
+	0.859586
+	+0.0001802
+
+	Complete non-DTI
+	238459
+	5.913913
+	5.093761
+	0.820152
+	+0.0002634
+
+	Complete incl. DTI
+	235185
+	5.830946
+	5.013513
+	0.817433
+	+0.0002612
+
+
+Supplementary Table S7. Descriptive cross-demographic calibration changes
+The subgroup analysis found 4 of 14 category-level point-estimate improvements and 10 deteriorations; only the Black or African American category showed an improvement with simultaneous 95% confidence interval excluding zero. The exploratory correlations are not independent inferential tests, and changes in group-absolute errors are not direct measures of applicant welfare.
+	Dimension
+	Groups
+	Spearman: size vs improvement
+	Spearman: baseline error vs improvement
+
+	Race
+	6
+	−0.657
+	+1.000
+
+	Ethnicity
+	4
+	−0.600
+	+0.400
+
+	Sex reporting
+	4
+	+0.400
+	+0.800
+
+
+HMDA XAI | Research draft — version 8 | Final editorial checks required
