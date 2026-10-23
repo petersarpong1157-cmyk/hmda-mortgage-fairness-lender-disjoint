@@ -56,6 +56,7 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [HMDA data access](docs/DATA_ACCESS.md) — source and filter documentation
 - [R audit and frozen-model inference scripts](R/) — supporting scripts, some requiring external protocol/checkpoint files
 - [Public aggregate verification](R/verify_public_results.R) — base-R consistency checks on four published tables; run `Rscript R/verify_public_results.R` from the repository root
+- [DTI-excluded feature verification](R/verify_feature_inventory.R) — confirms the ordered 67-feature inventory; optionally compares against the privately held `experiment_protocol.rds`
 - [Local checkpoint integrity manifest](docs/ARTIFACT_CHECKSUMS.md)
 - [Upload checklist](UPLOAD_CHECKLIST.md)
 - [MIT license](LICENSE) — applies to original repository code/documentation where copyrightable; not third-party HMDA records
