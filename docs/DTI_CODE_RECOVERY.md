@@ -127,4 +127,15 @@ Best selected epoch: 3; best validation Brier: 0.2504913. This is **author-repor
 Rscript R/test_reconstructed_training.R
 ```
 
-This script was **published but not executed independently at the time it was added**. Its explicit penalty-gradient check is a limited numerical smoke test, not a proof that the original fairness-loss implementation was recovered or that training is statistically equivalent to the archived models.
+This script was **not independently executed when it was added**, but it subsequently passed an author-run local smoke test (see below). Its explicit penalty-gradient check is a limited numerical smoke test, not a proof that the original fairness-loss implementation was recovered or that training is statistically equivalent to the archived models.
+
+## Author-run synthetic reconstruction smoke tests — passed
+
+The author downloaded the published reconstructed training and test scripts into RStudio, placed them together under an `R/` directory, and executed `source("R/test_reconstructed_training.R")`. The reported terminal output was:
+
+```
+PASS: Synthetic training, bounds and penalty-gradient smoke checks.
+LIMIT: No check of historic fairness formula or exact retraining.
+```
+
+This updates the status of the previously unexecuted synthetic smoke test: **passed in the author's local R environment**. It is not an independently witnessed clean-environment rerun, an audit of original training, or a validation against original HMDA checkpoints.
