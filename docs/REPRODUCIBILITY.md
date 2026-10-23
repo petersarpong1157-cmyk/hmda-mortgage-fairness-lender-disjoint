@@ -23,3 +23,6 @@ The newly trained DTI-excluded experiments used a separately specified optimizat
 These are retrospective prediction and audit experiments. Fairness optimization of historical denial codes does not establish prospective creditworthiness, causal discrimination, or legal compliance. Pointwise seed-specific cluster bootstrap intervals condition on checkpoints and do not incorporate retraining uncertainty.
 
 This repository is initially a *documentary archive*; a full executable release requires depositing the reviewed analysis scripts, permitted inputs, preprocessing resources, model artifacts and locked package environment and then verifying a clean run.
+## Published supporting R scripts (October 2026)
+
+The `R/` directory includes saved manifest audits, final preprocessing, architecture and frozen-checkpoint inference/verification scripts. They are not standalone: set `HMDA_BASE_DIR` to the local project directory and supply `LOCKED_FINAL_PROTOCOL.rds`, checkpoints, frozen manifest and recovered test application files from an authorized local environment. Previous preprocessing variants were intentionally omitted; `03_preprocessing.R` is the final version handling both actual missing values and categorical `NA` text. No complete raw-cohort reconstruction or original end-to-end training release is claimed.
