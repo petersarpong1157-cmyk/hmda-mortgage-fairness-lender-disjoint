@@ -77,3 +77,7 @@ stopifnot(identical(published$feature_name, protocol$feature_names))
 
 Keep the original RDS local until its metadata and suitability for public
 release have been reviewed.
+
+## Local feature-list cross-check
+
+On 2026-10-23, the author downloaded the published feature CSV from this repository directly into RStudio and ran `identical(published$feature_name, protocol$feature_names)` against the locally loaded `experiment_protocol.rds`. The comparison passed for all 67 features in the saved order. This is author-reported local verification, **not** an independent replication of feature engineering or training.
