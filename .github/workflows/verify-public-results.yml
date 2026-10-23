@@ -13,6 +13,8 @@ on:
     paths:
       - 'results/**'
       - 'R/verify_public_results.R'
+      - 'R/verify_feature_inventory.R'
+      - 'docs/dti_excluded_seed101_feature_names.csv'
       - '.github/workflows/verify-public-results.yml'
   workflow_dispatch:
 
