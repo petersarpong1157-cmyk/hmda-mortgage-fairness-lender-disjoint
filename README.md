@@ -51,7 +51,7 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [Upload checklist](UPLOAD_CHECKLIST.md)
 - [MIT license](LICENSE) — applies to original repository code/documentation where copyrightable; not third-party HMDA records
 
-**Not yet deposited via this connection:** the original manuscript DOCX, original R-generated four figure PDFs, actual model checkpoints, frozen manifest, full data extracts and original runnable scripts. Do not infer their public availability from this README.
+**Manuscript availability:** The author has chosen **not to publish the manuscript in this repository**. The repository is intended for supporting code, results, documentation and reproducibility materials only. Original R-generated figures, checkpoints, frozen manifest and full runnable scripts are not yet deposited. Do not infer their public availability from this README.
 
 ## Citation, funding and interests
 
