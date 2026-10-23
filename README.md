@@ -49,6 +49,7 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [Study figures](./) — four one-page PDF figures (Figure_1 through Figure_4) at repository root
 - [Local experiment manifest](docs/DTI_Excluded_Artifact_Manifest.csv) — filenames and hashes for locally archived artifacts, not the underlying files
 - [Reproducibility](docs/REPRODUCIBILITY.md) — verification status and limitations
+- [Local protocol inspection utility](R/inspect_local_training_metadata.R) — inspects recorded settings without exposing mortgage records
 - [DTI code-recovery status](docs/DTI_CODE_RECOVERY.md) — archived bootstrap evidence, differing CIs, and original-source limitations
 - [Local bootstrap-draw audit script](R/verify_archived_bootstrap.R) — newly documented post-hoc check (requires private local replicate CSV)
 - [Recorded R environment](docs/R_ENVIRONMENT.md) — observed package versions, not a complete dependency lock
