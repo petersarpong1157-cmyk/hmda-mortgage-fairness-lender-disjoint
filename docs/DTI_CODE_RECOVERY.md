@@ -61,18 +61,18 @@ The author inspected `experiment_protocol.rds` in R using
 | Selected best epoch (fair, lambda 2) | 19 |
 | Original development sampling reused | TRUE |
 
-The printed feature list was **truncated** (`chr [1:67]`), so the full
-67 names have not yet been transcribed or independently verified here.
+The author subsequently supplied the complete ordered list of 67 names, now archived in [dti_excluded_seed101_feature_names.csv](dti_excluded_seed101_feature_names.csv). It contains three numerical terms, nine age indicator terms and 55 state-code indicator terms. This records the **feature names and their order**, but does not independently establish factor-reference levels, scaling values, or encoded matrix equivalence.
 This is a verified **protocol inventory**, not a recovered training script.
 The RDS extract does not specify all choices necessary to reproduce the
 historical fit, including optimizer configuration beyond the learning rate,
 loss/fairness implementation, initialization and batching order. Do not
 attribute those details to the protocol without further evidence.
 
-To inspect all recorded feature names locally:
+To compare the public feature list with the local protocol:
 
 ```r
-print(protocol$feature_names)
+published <- read.csv("docs/dti_excluded_seed101_feature_names.csv", check.names = FALSE)
+stopifnot(identical(published$feature_name, protocol$feature_names))
 ```
 
 Keep the original RDS local until its metadata and suitability for public
