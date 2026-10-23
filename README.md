@@ -49,6 +49,8 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [Study figures](./) — four one-page PDF figures (Figure_1 through Figure_4) at repository root
 - [Local experiment manifest](docs/DTI_Excluded_Artifact_Manifest.csv) — filenames and hashes for locally archived artifacts, not the underlying files
 - [Reproducibility](docs/REPRODUCIBILITY.md) — verification status and limitations
+- [Recorded R environment](docs/R_ENVIRONMENT.md) — observed package versions, not a complete dependency lock
+- [Automated public-results check](.github/workflows/verify-public-results.yml) — runs the base-R internal-consistency script on relevant changes
 - [HMDA data access](docs/DATA_ACCESS.md) — source and filter documentation
 - [R audit and frozen-model inference scripts](R/) — supporting scripts, some requiring external protocol/checkpoint files
 - [Public aggregate verification](R/verify_public_results.R) — base-R consistency checks on four published tables; run `Rscript R/verify_public_results.R` from the repository root
