@@ -7,7 +7,7 @@
 
 A transparency and reproducibility repository supporting the manuscript **“Lender-Disjoint Evaluation of Fairness-Aware Mortgage Prediction: Cross-Demographic Calibration Trade-offs and Reproducibility Challenges.”**
 
-**Important:** This is a *partial research archive*, not an independently reproduced end-to-end training pipeline. The original development-sampling seed/procedure has not been recovered, and original training has not been independently reproduced. No verified DOI exists as of this update. The manuscript should not claim otherwise.
+**Important:** This is a *partial research archive*, not an independently reproduced end-to-end training pipeline. The original development-sampling seed/procedure has not been recovered, and original training has not been independently reproduced. A Zenodo DOI has been issued for GitHub release v3.9.7: [10.5281/zenodo.23605964](https://doi.org/10.5281/zenodo.23605964). The DOI was confirmed from the author's Zenodo publication screen; the full Zenodo file inventory has not been independently audited.
 
 ## Study design
 
@@ -62,14 +62,15 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [Local checkpoint integrity manifest](docs/ARTIFACT_CHECKSUMS.md)
 - [Upload checklist](UPLOAD_CHECKLIST.md)
 - [MIT license](LICENSE) — applies to original repository code/documentation where copyrightable; not third-party HMDA records
-- [Manuscript text access copy](manuscript/HMDA_V8_readable_text.txt) — working draft; formatted DOCX not deposited
-- [Citation metadata](CITATION.cff) — repository citation details without an unverified DOI
+- [Manuscript DOCX (Version 8)](./HMDA_V8_GitHub_Aligned_Review%20%281%29%20%281%29.docx) — research draft in repository root
+- [Manuscript text access copy](manuscript/HMDA_V8_readable_text.txt) — text-only reading copy
+- [Citation metadata](CITATION.cff) — includes the Zenodo release DOI
 
-**Manuscript availability:** An author-authorized [plain-text access copy of the research draft](manuscript/HMDA_V8_readable_text.txt) is published here. This text extraction is not a substitute for the formatted Word manuscript, which is not yet deposited in GitHub. The manuscript is a working draft, not peer-reviewed publication. Four original R-generated PDF figures are publicly available at the repository root. Model checkpoints, frozen manifest and the **complete end-to-end training/source-data pipeline** are not deposited. Six supporting R scripts for manifest checks, preprocessing, inference and prediction verification have been deposited, but depend on files not present in this repository. Do not infer their public availability from this README.
+**Manuscript availability:** An author-authorized [plain-text access copy of the research draft](manuscript/HMDA_V8_readable_text.txt) is published here. The formatted Version 8 Word manuscript is also deposited in the repository root; the text extraction does not preserve formatting and figures. The manuscript is a working draft, not peer-reviewed publication. Four original R-generated PDF figures are publicly available at the repository root. Model checkpoints, frozen manifest and the **complete end-to-end training/source-data pipeline** are not deposited. Six supporting R scripts for manifest checks, preprocessing, inference and prediction verification have been deposited, but depend on files not present in this repository. Do not infer their public availability from this README.
 
 ## Citation, funding and interests
 
-Author: Peter Sarpong (Independent Researcher). Funding: none. Competing interests: none declared. No DOI has yet been verified. Please cite the manuscript with its title and author until a legitimate publication record exists.
+Author: Peter Sarpong (Independent Researcher). Funding: none. Competing interests: none declared. GitHub release [v3.9.7](https://github.com/petersarpong1157-cmyk/hmda-mortgage-fairness-lender-disjoint/releases/tag/v3.9.7) has Zenodo version DOI [10.5281/zenodo.23605964](https://doi.org/10.5281/zenodo.23605964) (author's published Zenodo screen). Cite this archived research release separately from any subsequent peer-reviewed journal article.
 
 ## Caution
 
