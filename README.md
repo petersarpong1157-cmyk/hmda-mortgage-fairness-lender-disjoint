@@ -62,9 +62,10 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [Local checkpoint integrity manifest](docs/ARTIFACT_CHECKSUMS.md)
 - [Upload checklist](UPLOAD_CHECKLIST.md)
 - [MIT license](LICENSE) — applies to original repository code/documentation where copyrightable; not third-party HMDA records
+- [Manuscript text access copy](manuscript/HMDA_V8_readable_text.txt) — working draft; formatted DOCX not deposited
 - [Citation metadata](CITATION.cff) — repository citation details without an unverified DOI
 
-**Manuscript availability:** The author has chosen **not to publish the manuscript in this repository**. The repository is intended for supporting code, results, documentation and reproducibility materials only. Four original R-generated PDF figures are publicly available at the repository root. Model checkpoints, frozen manifest and the **complete end-to-end training/source-data pipeline** are not deposited. Six supporting R scripts for manifest checks, preprocessing, inference and prediction verification have been deposited, but depend on files not present in this repository. Do not infer their public availability from this README.
+**Manuscript availability:** An author-authorized [plain-text access copy of the research draft](manuscript/HMDA_V8_readable_text.txt) is published here. This text extraction is not a substitute for the formatted Word manuscript, which is not yet deposited in GitHub. The manuscript is a working draft, not peer-reviewed publication. Four original R-generated PDF figures are publicly available at the repository root. Model checkpoints, frozen manifest and the **complete end-to-end training/source-data pipeline** are not deposited. Six supporting R scripts for manifest checks, preprocessing, inference and prediction verification have been deposited, but depend on files not present in this repository. Do not infer their public availability from this README.
 
 ## Citation, funding and interests
 
