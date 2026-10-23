@@ -1,8 +1,8 @@
 # Files required for a more complete research release
 
-Already in repository: README, LICENSE (MIT), data-access and reproducibility notes, four original PDF figures at repository root, aggregate results tables in `results/`, and the local artifact checksum manifest in `docs/`. The application-level prediction files are intentionally excluded.
+Already in repository: Version 8 manuscript, README, LICENSE (MIT), data-access and reproducibility notes, four original PDF figures at repository root, aggregate results tables in `results/`, and the local artifact checksum manifest in `docs/`. The application-level prediction files are intentionally excluded.
 
-**Manuscript policy:** The author will **not upload the manuscript** to this repository. This is intentional, not an outstanding upload task.
+**Manuscript status:** The author subsequently authorized publication; the Version 8 DOCX is deposited in the repository root and a plain-text access copy in `manuscript/`. GitHub release v3.9.7 is archived in Zenodo under DOI [10.5281/zenodo.23605964](https://doi.org/10.5281/zenodo.23605964).
 
 Still **not uploaded**:
 - Full executable **raw cohort construction and split-generation code** (the uploaded 01 and 02 scripts only verify an existing manifest). Preprocessing, recovered DNN architecture, frozen inference and prediction verification scripts **are now uploaded**.
@@ -14,4 +14,4 @@ Still **not uploaded**:
 
 Do not upload the massive raw HMDA LAR, application-level extracts, secrets, RStudio histories, or local personal paths. If distributing trained checkpoints, use appropriately documented versioned releases.
 
-When files are deposited, update the README wording and rerun reproducibility checks. No DOI exists until a legitimate archival release is deposited and verified.
+When files are deposited, update the README wording and rerun reproducibility checks. Zenodo version DOI for release v3.9.7: 10.5281/zenodo.23605964. Changes made after the release require a new release to appear in a new archived version.
