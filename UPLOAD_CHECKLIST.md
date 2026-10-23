@@ -2,8 +2,9 @@
 
 Already in repository: README, LICENSE (MIT), data-access and reproducibility notes, results summary.
 
+**Manuscript policy:** The author will **not upload the manuscript** to this repository. This is intentional, not an outstanding upload task.
+
 Still **not uploaded**:
-- Manuscript Version 8 DOCX (locally available, but binary upload not possible through current GitHub text-only connector)
 - Original four R-produced PDF figures
 - Original preprocessing and inference scripts, model architecture, cohort-building and manifest-audit scripts
 - Frozen lender manifest and reviewed numeric result CSVs (if permissible to distribute)
