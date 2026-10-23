@@ -139,3 +139,7 @@ LIMIT: No check of historic fairness formula or exact retraining.
 ```
 
 This updates the status of the previously unexecuted synthetic smoke test: **passed in the author's local R environment**. It is not an independently witnessed clean-environment rerun, an audit of original training, or a validation against original HMDA checkpoints.
+
+## Controlled comparison diagnostic
+
+`R/compare_reconstructed_checkpoint.R` defines a new **aggregate-only** function to compare two already instantiated models on the **same** aligned 67-column feature matrix. It reports mean/root-mean-square/maximum absolute prediction differences and correlation without writing predictions. It does **not** load checkpoints, reconstruct the original 2025 preprocessing pipeline, train historical models, or certify model equivalence. The caller must separately ensure both models have compatible structures, both operate on exactly the same feature encoding and scaling, and data may be used locally. The source is newly written and has not yet been smoke-tested. Any difference cannot automatically be attributed to DTI omission or fairness regularization because the reconstructed training implementation includes assumed components.
