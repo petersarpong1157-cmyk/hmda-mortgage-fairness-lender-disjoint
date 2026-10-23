@@ -7,7 +7,7 @@
 
 A transparency and reproducibility repository supporting the manuscript **“Lender-Disjoint Evaluation of Fairness-Aware Mortgage Prediction: Cross-Demographic Calibration Trade-offs and Reproducibility Challenges.”**
 
-**Important:** This is a *partial research archive*, not an independently reproduced end-to-end training pipeline. The original development-sampling seed/procedure has not been recovered, and original training has not been independently reproduced. A Zenodo DOI has been issued for GitHub release v3.9.7: [10.5281/zenodo.23605964](https://doi.org/10.5281/zenodo.23605964). The DOI was confirmed from the author's Zenodo publication screen; the full Zenodo file inventory has not been independently audited.
+**Important:** This is a *partial research archive*, not an independently reproduced end-to-end training pipeline. The original development-sampling seed/procedure has not been recovered, and original training has not been independently reproduced. A Zenodo DOI has been issued for GitHub release v3.9.8: [10.5281/zenodo.23606236](https://doi.org/10.5281/zenodo.23606236). The DOI was confirmed from the author's Zenodo publication screen; the full Zenodo file inventory has not been independently audited.
 
 ## Study design
 
@@ -70,7 +70,7 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 
 ## Citation, funding and interests
 
-Author: Peter Sarpong (Independent Researcher). Funding: none. Competing interests: none declared. GitHub release [v3.9.7](https://github.com/petersarpong1157-cmyk/hmda-mortgage-fairness-lender-disjoint/releases/tag/v3.9.7) has Zenodo version DOI [10.5281/zenodo.23605964](https://doi.org/10.5281/zenodo.23605964) (author's published Zenodo screen). Cite this archived research release separately from any subsequent peer-reviewed journal article.
+Author: Peter Sarpong (Independent Researcher). Funding: none. Competing interests: none declared. GitHub release [v3.9.8](https://github.com/petersarpong1157-cmyk/hmda-mortgage-fairness-lender-disjoint/releases/tag/v3.9.8) has Zenodo version DOI [10.5281/zenodo.23606236](https://doi.org/10.5281/zenodo.23606236) (author's published Zenodo screen). Cite this archived research release separately from any subsequent peer-reviewed journal article.
 
 ## Caution
 
