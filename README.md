@@ -49,11 +49,12 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [Local experiment manifest](docs/DTI_Excluded_Artifact_Manifest.csv) — filenames and hashes for locally archived artifacts, not the underlying files
 - [Reproducibility](docs/REPRODUCIBILITY.md) — verification status and limitations
 - [HMDA data access](docs/DATA_ACCESS.md) — source and filter documentation
+- [R audit and frozen-model inference scripts](R/) — six reviewed scripts plus the previously published summary check; require external protocol/checkpoint files
 - [Local checkpoint integrity manifest](docs/ARTIFACT_CHECKSUMS.md)
 - [Upload checklist](UPLOAD_CHECKLIST.md)
 - [MIT license](LICENSE) — applies to original repository code/documentation where copyrightable; not third-party HMDA records
 
-**Manuscript availability:** The author has chosen **not to publish the manuscript in this repository**. The repository is intended for supporting code, results, documentation and reproducibility materials only. Original R-generated figures, checkpoints, frozen manifest and full runnable scripts are not yet deposited. Do not infer their public availability from this README.
+**Manuscript availability:** The author has chosen **not to publish the manuscript in this repository**. The repository is intended for supporting code, results, documentation and reproducibility materials only. Original R-generated figures, checkpoints, frozen manifest and the **complete end-to-end training/source-data pipeline** are not yet deposited. Six supporting R scripts for manifest checks, preprocessing, inference and prediction verification have been deposited, but depend on files not present in this repository. Do not infer their public availability from this README.
 
 ## Citation, funding and interests
 
