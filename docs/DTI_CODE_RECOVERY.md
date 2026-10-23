@@ -81,3 +81,28 @@ release have been reviewed.
 ## Local feature-list cross-check
 
 On 2026-10-23, the author downloaded the published feature CSV from this repository directly into RStudio and ran `identical(published$feature_name, protocol$feature_names)` against the locally loaded `experiment_protocol.rds`. The comparison passed for all 67 features in the saved order. This is author-reported local verification, **not** an independent replication of feature engineering or training.
+
+## Experimental training reconstruction (not historical source)
+
+`R/reconstructed_dti_excluded_training.R` is a **new hypothetical
+implementation**, provided as a starting point for a separate reproducibility
+experiment. The original optimization code was not found in saved R scripts,
+the project `.Rhistory`, or the home-directory R history. The author-confirmed
+seed-101 protocol records batch size 1024, learning rate 0.001, up to 25 epochs,
+patience 5, validation Brier selection, lambda values 0/2 and 67 features.
+
+**Unverified implementation choices:** Adam optimization; binary
+cross-entropy with logits; squared Black-minus-White mean prediction
+residual difference as the penalty; epoch-wise random shuffling;
+mini-batch rather than full-dataset penalty; initialization and the
+precise early-stopping tolerance. The 64/32 hidden-layer layout mirrors
+a previously recovered DNN architecture, but matching the historic
+DTI-excluded network is not independently established.
+
+The script is **untested end-to-end**, requires locally prepared
+67-column design matrices and aligned binary outcomes and race labels,
+and must not be used to regenerate published statistics unless
+its outputs and assumptions have been independently validated.
+Published seed-101 weights and results were **not** produced with this
+newly written code. No manuscript or application-level inputs are
+distributed. It is research-only, not a lending-decision system.
