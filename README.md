@@ -45,6 +45,8 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 ## Repository organization
 
 - [Results](results/VERIFIED_RESULTS.md) — transcribed, numerically checked summaries
+- [Uploaded aggregate results](results/) — nine additional verifiable CSV tables, including bootstrap, missingness and complete-case sensitivity; **no application-level records**
+- [Local experiment manifest](docs/DTI_Excluded_Artifact_Manifest.csv) — filenames and hashes for locally archived artifacts, not the underlying files
 - [Reproducibility](docs/REPRODUCIBILITY.md) — verification status and limitations
 - [HMDA data access](docs/DATA_ACCESS.md) — source and filter documentation
 - [Local checkpoint integrity manifest](docs/ARTIFACT_CHECKSUMS.md)
