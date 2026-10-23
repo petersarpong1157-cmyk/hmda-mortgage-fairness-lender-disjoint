@@ -1,0 +1,25 @@
+# Reproducibility statement
+
+## What was verified locally
+
+- Raw-to-eligible *lender counts* matched the frozen manifest for each of 2,562 lenders. This does not prove exact identity of every eligible row.
+- Four primary frozen model checkpoints were independently evaluated, matching archived probability multisets within lender/action groups with float tolerance. Original test prediction ordering was **not** fully recovered at unique application level.
+- The separate DTI-excluded analysis trained λ=0 and λ=2 models at seeds 101, 202, 303; each evaluated 244,463 applications from 386 held-out lenders.
+- Seed-specific held-out results were checked and 2,000 paired lender-cluster bootstrap replicates generated per seed.
+- Seed-101 DTI-excluded predictions aligned with recovered test rows on available keys, not unique application IDs.
+- Locally archived 14 sensitivity files passed existence, size, and MD5 inventory checks. The actual binaries are **not** provided in this repository.
+
+## What has NOT been verified
+
+- Original development-sampling algorithm and seed, original end-to-end training, clean-room execution of a complete pipeline
+- Exact official HMDA source release/snapshot corresponding to local source ZIP
+- Unique row-level original-prediction pairing; ethnicity-specific missingness for the recovered test extract
+- Public availability of original R-generated figures, all model checkpoints, and full manifest
+
+The newly trained DTI-excluded experiments used a separately specified optimization protocol. Differences between the original primary models and new models **cannot be assigned causally to DTI exclusion alone**.
+
+## Interpretation
+
+These are retrospective prediction and audit experiments. Fairness optimization of historical denial codes does not establish prospective creditworthiness, causal discrimination, or legal compliance. Pointwise seed-specific cluster bootstrap intervals condition on checkpoints and do not incorporate retraining uncertainty.
+
+This repository is initially a *documentary archive*; a full executable release requires depositing the reviewed analysis scripts, permitted inputs, preprocessing resources, model artifacts and locked package environment and then verifying a clean run.
