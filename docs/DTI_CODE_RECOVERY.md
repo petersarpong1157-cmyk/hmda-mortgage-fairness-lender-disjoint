@@ -118,3 +118,13 @@ The author executed the newly written `R/reconstructed_dti_excluded_training.R` 
 | 3 | 0.6964214 | 0.2504913 |
 
 Best selected epoch: 3; best validation Brier: 0.2504913. This is **author-reported functional execution evidence**, not a controlled independent rerun. It does not verify fairness-penalty correctness, reproducibility across systems, or equivalence to original HMDA training. No synthetic or application-level input records were uploaded.
+
+## Additional reconstruction smoke-test script
+
+`R/test_reconstructed_training.R` exercises the new hypothetical training implementation on synthetic inputs, checks rejection of incorrectly sized feature matrices, verifies basic bounds for early-stopping outputs, and tests that a sample squared residual-gap penalty has a finite gradient. Run locally from the cloned repository root with R `torch` and libtorch available:
+
+```sh
+Rscript R/test_reconstructed_training.R
+```
+
+This script was **published but not executed independently at the time it was added**. Its explicit penalty-gradient check is a limited numerical smoke test, not a proof that the original fairness-loss implementation was recovered or that training is statistically equivalent to the archived models.
