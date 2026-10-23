@@ -1,0 +1,7 @@
+Scenario,split,Expected,Reconstructed,Exact_Lenders,Mismatched_Lenders,Maximum_Absolute_Difference
+Include_Exempt,test,244463,244684,381,5,100
+Strict_No,test,244463,244463,386,0,0
+Include_Exempt,train,1530103,1530442,1769,23,88
+Strict_No,train,1530103,1530103,1792,0,0
+Include_Exempt,validation,260348,260380,381,3,12
+Strict_No,validation,260348,260348,384,0,0
