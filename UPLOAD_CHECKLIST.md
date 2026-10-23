@@ -1,6 +1,6 @@
 # Files required for a more complete research release
 
-Already in repository: README, LICENSE (MIT), data-access and reproducibility notes, results summary.
+Already in repository: README, LICENSE (MIT), data-access and reproducibility notes, results summary, eight aggregate results CSVs in `results/` plus one local artifact checksum manifest CSV in `docs/`. The application-level prediction file is intentionally excluded.
 
 **Manuscript policy:** The author will **not upload the manuscript** to this repository. This is intentional, not an outstanding upload task.
 
