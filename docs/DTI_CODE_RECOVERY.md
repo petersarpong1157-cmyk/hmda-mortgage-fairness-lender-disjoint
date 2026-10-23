@@ -106,3 +106,15 @@ its outputs and assumptions have been independently validated.
 Published seed-101 weights and results were **not** produced with this
 newly written code. No manuscript or application-level inputs are
 distributed. It is research-only, not a lending-decision system.
+
+## Author-run synthetic smoke test (October 23, 2026)
+
+The author executed the newly written `R/reconstructed_dti_excluded_training.R` with synthetic inputs (2,000 training observations, 500 validation observations, 67 numeric columns, binary artificial outcomes and randomly assigned Black/White category labels). Lambda was 2, seed 101, mini-batch size 1,024, learning rate 0.001, and the test was limited to three epochs. The author reported:
+
+| Epoch | Training loss | Validation Brier |
+|---|---:|---:|
+| 1 | 0.6953884 | 0.2508667 |
+| 2 | 0.6970546 | 0.2507178 |
+| 3 | 0.6964214 | 0.2504913 |
+
+Best selected epoch: 3; best validation Brier: 0.2504913. This is **author-reported functional execution evidence**, not a controlled independent rerun. It does not verify fairness-penalty correctness, reproducibility across systems, or equivalence to original HMDA training. No synthetic or application-level input records were uploaded.
