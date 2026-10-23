@@ -1,0 +1,23 @@
+# Large source data, derived application-level records, model binaries
+*.zip
+*.gz
+*.parquet
+*.rds
+*.pt
+*.pth
+*.onnx
+*.csv
+!results/*.csv
+!docs/*.csv
+.DS_Store
+.Rhistory
+.RData
+.Rproj.user/
+__pycache__/
+*.tmp
+*.log
+# Local paths / potentially identifying source material
+data/
+checkpoints/
+raw_reconstruction_audit/
+DTI_Excluded_Sensitivity/
