@@ -6,6 +6,8 @@ on:
     paths:
       - 'results/**'
       - 'R/verify_public_results.R'
+      - 'R/verify_feature_inventory.R'
+      - 'docs/dti_excluded_seed101_feature_names.csv'
       - '.github/workflows/verify-public-results.yml'
   pull_request:
     paths:
@@ -29,4 +31,6 @@ jobs:
           r-version: '4.5.2'
           use-public-rspm: false
       - name: Verify public aggregate results
-        run: Rscript R/verify_public_results.R
+        run: |
+          Rscript R/verify_public_results.R
+          Rscript R/verify_feature_inventory.R
