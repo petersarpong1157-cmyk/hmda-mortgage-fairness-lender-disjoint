@@ -40,3 +40,40 @@ applications, lender IDs, or other record-level predictions.
 For publication, report sensitivity confidence intervals from the
 pre-specified verified analysis output and transparently document any
 separately archived local bootstrap experiments.
+
+## Seed-101 saved experiment protocol (author-inspected RDS)
+
+The author inspected `experiment_protocol.rds` in R using
+`str(protocol, max.level = 3)` and reported these recorded settings:
+
+| Field | Recorded value |
+|---|---|
+| Experiment | DTI-excluded sensitivity |
+| Seed | 101 |
+| Batch size | 1,024 |
+| Learning rate | 0.001 |
+| Maximum epochs | 25 |
+| Early-stopping patience | 5 |
+| Model selection metric | Validation Brier |
+| Feature vector length | 67 |
+| Fairness penalty lambdas | 0 and 2 |
+| Selected best epoch (standard, lambda 0) | 14 |
+| Selected best epoch (fair, lambda 2) | 19 |
+| Original development sampling reused | TRUE |
+
+The printed feature list was **truncated** (`chr [1:67]`), so the full
+67 names have not yet been transcribed or independently verified here.
+This is a verified **protocol inventory**, not a recovered training script.
+The RDS extract does not specify all choices necessary to reproduce the
+historical fit, including optimizer configuration beyond the learning rate,
+loss/fairness implementation, initialization and batching order. Do not
+attribute those details to the protocol without further evidence.
+
+To inspect all recorded feature names locally:
+
+```r
+print(protocol$feature_names)
+```
+
+Keep the original RDS local until its metadata and suitability for public
+release have been reviewed.
