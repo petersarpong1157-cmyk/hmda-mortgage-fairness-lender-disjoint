@@ -6,7 +6,7 @@ Already in repository: README, LICENSE (MIT), data-access and reproducibility no
 
 Still **not uploaded**:
 - Original four R-produced PDF figures
-- Original preprocessing and inference scripts, model architecture, cohort-building and manifest-audit scripts
+- Full executable **raw cohort construction and split-generation code** (the uploaded 01 and 02 scripts only verify an existing manifest). Preprocessing, recovered DNN architecture, frozen inference and prediction verification scripts **are now uploaded**.
 - Frozen lender manifest and reviewed numeric result CSVs (if permissible to distribute)
 - DTI-excluded training and bootstrap R scripts saved as durable files, rather than only RStudio session functions
 - Six DTI-excluded model checkpoints and any other pretrained weights (publish only after auditing file sizes, licensing, and contents)
