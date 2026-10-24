@@ -14,4 +14,4 @@ Still **not uploaded**:
 
 Do not upload the massive raw HMDA LAR, application-level extracts, secrets, RStudio histories, or local personal paths. If distributing trained checkpoints, use appropriately documented versioned releases.
 
-When files are deposited, update the README wording and rerun reproducibility checks. A new manuscript-free Zenodo DOI is pending creation of a clean GitHub release.
+When files are deposited, update the README wording and rerun reproducibility checks. Clean research-only GitHub release v3.9.9 archived by Zenodo: DOI 10.5281/zenodo.23607982.
