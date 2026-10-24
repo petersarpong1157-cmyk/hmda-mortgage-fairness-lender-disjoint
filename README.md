@@ -62,11 +62,9 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [Local checkpoint integrity manifest](docs/ARTIFACT_CHECKSUMS.md)
 - [Upload checklist](UPLOAD_CHECKLIST.md)
 - [MIT license](LICENSE) — applies to original repository code/documentation where copyrightable; not third-party HMDA records
-- [Manuscript DOCX (Version 8)](./HMDA_V8_GitHub_Aligned_Review%20%281%29%20%281%29.docx) — research draft in repository root
-- [Manuscript text access copy](manuscript/HMDA_V8_readable_text.txt) — text-only reading copy
 - [Citation metadata](CITATION.cff) — includes the Zenodo release DOI
 
-**Manuscript availability:** An author-authorized [plain-text access copy of the research draft](manuscript/HMDA_V8_readable_text.txt) is published here. The formatted Version 8 Word manuscript is also deposited in the repository root; the text extraction does not preserve formatting and figures. The manuscript is a working draft, not peer-reviewed publication. Four original R-generated PDF figures are publicly available at the repository root. Model checkpoints, frozen manifest and the **complete end-to-end training/source-data pipeline** are not deposited. Six supporting R scripts for manifest checks, preprocessing, inference and prediction verification have been deposited, but depend on files not present in this repository. Do not infer their public availability from this README.
+**Manuscript availability:** The author has withdrawn the full manuscript files from the current GitHub branch. This repository contains only supporting research materials. Older GitHub commits, release archives and Zenodo records may still contain the previously published manuscript; branch deletion does not erase those copies.
 
 ## Citation, funding and interests
 
