@@ -2,7 +2,7 @@
 
 Already in repository: README, LICENSE (MIT), data-access and reproducibility notes, four original PDF figures at repository root, aggregate results tables in `results/`, and the local artifact checksum manifest in `docs/`. The application-level prediction files are intentionally excluded.
 
-**Manuscript status:** The author requested removal of the manuscript from the current GitHub branch; both Word copies and the extracted plain-text copy were deleted. Previously published GitHub releases and Zenodo archives may retain them.
+**Manuscript status:** The author requested removal of the manuscript from the current GitHub branch; both Word copies and the extracted plain-text copy were deleted. Earlier GitHub history and release archives may retain them; the author reports deleting prior Zenodo records.
 
 Still **not uploaded**:
 - Full executable **raw cohort construction and split-generation code** (the uploaded 01 and 02 scripts only verify an existing manifest). Preprocessing, recovered DNN architecture, frozen inference and prediction verification scripts **are now uploaded**.
@@ -14,4 +14,4 @@ Still **not uploaded**:
 
 Do not upload the massive raw HMDA LAR, application-level extracts, secrets, RStudio histories, or local personal paths. If distributing trained checkpoints, use appropriately documented versioned releases.
 
-When files are deposited, update the README wording and rerun reproducibility checks. Zenodo version DOI for release v3.9.7: 10.5281/zenodo.23605964. Changes made after the release require a new release to appear in a new archived version.
+When files are deposited, update the README wording and rerun reproducibility checks. A new manuscript-free Zenodo DOI is pending creation of a clean GitHub release.
