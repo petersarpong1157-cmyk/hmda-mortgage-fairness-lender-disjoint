@@ -2,8 +2,6 @@
 
 Already in repository: README, LICENSE (MIT), data-access and reproducibility notes, four original PDF figures at repository root, aggregate results tables in `results/`, and the local artifact checksum manifest in `docs/`. The application-level prediction files are intentionally excluded.
 
-**Manuscript status:** The author requested removal of the manuscript from the current GitHub branch; both Word copies and the extracted plain-text copy were deleted. Earlier GitHub history and release archives may retain them; the author reports deleting prior Zenodo records.
-
 Still **not uploaded**:
 - Full executable **raw cohort construction and split-generation code** (the uploaded 01 and 02 scripts only verify an existing manifest). Preprocessing, recovered DNN architecture, frozen inference and prediction verification scripts **are now uploaded**.
 - Frozen lender manifest (not published); additional reviewed numeric results only if necessary and appropriate to distribute
