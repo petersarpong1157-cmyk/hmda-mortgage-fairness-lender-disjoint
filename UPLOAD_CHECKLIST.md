@@ -1,8 +1,8 @@
 # Files required for a more complete research release
 
-Already in repository: Version 8 manuscript, README, LICENSE (MIT), data-access and reproducibility notes, four original PDF figures at repository root, aggregate results tables in `results/`, and the local artifact checksum manifest in `docs/`. The application-level prediction files are intentionally excluded.
+Already in repository: README, LICENSE (MIT), data-access and reproducibility notes, four original PDF figures at repository root, aggregate results tables in `results/`, and the local artifact checksum manifest in `docs/`. The application-level prediction files are intentionally excluded.
 
-**Manuscript status:** The author subsequently authorized publication; the Version 8 DOCX is deposited in the repository root and a plain-text access copy in `manuscript/`. GitHub release v3.9.7 is archived in Zenodo under DOI [10.5281/zenodo.23605964](https://doi.org/10.5281/zenodo.23605964).
+**Manuscript status:** The author requested removal of the manuscript from the current GitHub branch; both Word copies and the extracted plain-text copy were deleted. Previously published GitHub releases and Zenodo archives may retain them.
 
 Still **not uploaded**:
 - Full executable **raw cohort construction and split-generation code** (the uploaded 01 and 02 scripts only verify an existing manifest). Preprocessing, recovered DNN architecture, frozen inference and prediction verification scripts **are now uploaded**.
