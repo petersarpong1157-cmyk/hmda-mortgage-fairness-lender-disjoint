@@ -7,7 +7,7 @@
 
 A transparency and reproducibility repository supporting the manuscript **“Lender-Disjoint Evaluation of Fairness-Aware Mortgage Prediction: Cross-Demographic Calibration Trade-offs and Reproducibility Challenges.”**
 
-**Important:** This is a *partial research archive*, not an independently reproduced end-to-end training pipeline. The original development-sampling seed/procedure has not been recovered, and original training has not been independently reproduced. A new Zenodo deposit is pending for the next manuscript-free GitHub release. Previously published versions were withdrawn by the author; their DOI records may remain discoverable.
+**Important:** This is a *partial research archive*, not an independently reproduced end-to-end training pipeline. The original development-sampling seed/procedure has not been recovered, and original training has not been independently reproduced. Manuscript-free GitHub release **v3.9.9** has been archived on Zenodo: **[10.5281/zenodo.23607982](https://doi.org/10.5281/zenodo.23607982)**. Previously published versions were withdrawn by the author; their DOI records may remain discoverable.
 
 ## Study design
 
@@ -62,13 +62,13 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [Local checkpoint integrity manifest](docs/ARTIFACT_CHECKSUMS.md)
 - [Upload checklist](UPLOAD_CHECKLIST.md)
 - [MIT license](LICENSE) — applies to original repository code/documentation where copyrightable; not third-party HMDA records
-- [Citation metadata](CITATION.cff) — cites the public code repository until a new verified Zenodo DOI is assigned
+- [Citation metadata](CITATION.cff) — identifies the public research code and results release DOI
 
 **Manuscript availability:** The author has withdrawn the full manuscript files from the current GitHub branch. This repository contains only supporting research materials. Older GitHub commits or release archives may still contain the previously posted manuscript; branch deletion does not erase those copies. The author reports deleting the prior Zenodo deposits.
 
 ## Citation, funding and interests
 
-Author: Peter Sarpong (Independent Researcher). Funding: none. Competing interests: none declared. Cite the GitHub research repository until a new manuscript-free Zenodo release DOI is confirmed; cite any later peer-reviewed article separately.
+Author: Peter Sarpong (Independent Researcher). Funding: none. Competing interests: none declared. Cite the manuscript-free Zenodo research archive **v3.9.9**, DOI **[10.5281/zenodo.23607982](https://doi.org/10.5281/zenodo.23607982)**; cite any later peer-reviewed article separately.
 
 ## Caution
 
