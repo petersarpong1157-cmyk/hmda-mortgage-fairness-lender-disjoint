@@ -64,8 +64,6 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [MIT license](LICENSE) — applies to original repository code/documentation where copyrightable; not third-party HMDA records
 - [Citation metadata](CITATION.cff) — identifies the public research code and results release DOI
 
-**Manuscript availability:** The author has withdrawn the full manuscript files from the current GitHub branch. This repository contains only supporting research materials. Older GitHub commits or release archives may still contain the previously posted manuscript; branch deletion does not erase those copies. The author reports deleting the prior Zenodo deposits.
-
 ## Citation, funding and interests
 
 Author: Peter Sarpong (Independent Researcher). Funding: none. Competing interests: none declared. Cite the manuscript-free Zenodo research archive **v3.9.9**, DOI **[10.5281/zenodo.23607982](https://doi.org/10.5281/zenodo.23607982)**; cite any later peer-reviewed article separately.
