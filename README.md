@@ -7,7 +7,7 @@
 
 A transparency and reproducibility repository supporting the manuscript **“Lender-Disjoint Evaluation of Fairness-Aware Mortgage Prediction: Cross-Demographic Calibration Trade-offs and Reproducibility Challenges.”**
 
-**Important:** This is a *partial research archive*, not an independently reproduced end-to-end training pipeline. The original development-sampling seed/procedure has not been recovered, and original training has not been independently reproduced. A Zenodo DOI has been issued for GitHub release v3.9.8: [10.5281/zenodo.23606236](https://doi.org/10.5281/zenodo.23606236). The DOI was confirmed from the author's Zenodo publication screen; the full Zenodo file inventory has not been independently audited.
+**Important:** This is a *partial research archive*, not an independently reproduced end-to-end training pipeline. The original development-sampling seed/procedure has not been recovered, and original training has not been independently reproduced. A new Zenodo deposit is pending for the next manuscript-free GitHub release. Previously published versions were withdrawn by the author; their DOI records may remain discoverable.
 
 ## Study design
 
@@ -62,13 +62,13 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [Local checkpoint integrity manifest](docs/ARTIFACT_CHECKSUMS.md)
 - [Upload checklist](UPLOAD_CHECKLIST.md)
 - [MIT license](LICENSE) — applies to original repository code/documentation where copyrightable; not third-party HMDA records
-- [Citation metadata](CITATION.cff) — includes the Zenodo release DOI
+- [Citation metadata](CITATION.cff) — cites the public code repository until a new verified Zenodo DOI is assigned
 
-**Manuscript availability:** The author has withdrawn the full manuscript files from the current GitHub branch. This repository contains only supporting research materials. Older GitHub commits, release archives and Zenodo records may still contain the previously published manuscript; branch deletion does not erase those copies.
+**Manuscript availability:** The author has withdrawn the full manuscript files from the current GitHub branch. This repository contains only supporting research materials. Older GitHub commits or release archives may still contain the previously posted manuscript; branch deletion does not erase those copies. The author reports deleting the prior Zenodo deposits.
 
 ## Citation, funding and interests
 
-Author: Peter Sarpong (Independent Researcher). Funding: none. Competing interests: none declared. GitHub release [v3.9.8](https://github.com/petersarpong1157-cmyk/hmda-mortgage-fairness-lender-disjoint/releases/tag/v3.9.8) has Zenodo version DOI [10.5281/zenodo.23606236](https://doi.org/10.5281/zenodo.23606236) (author's published Zenodo screen). Cite this archived research release separately from any subsequent peer-reviewed journal article.
+Author: Peter Sarpong (Independent Researcher). Funding: none. Competing interests: none declared. Cite the GitHub research repository until a new manuscript-free Zenodo release DOI is confirmed; cite any later peer-reviewed article separately.
 
 ## Caution
 
