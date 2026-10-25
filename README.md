@@ -47,6 +47,7 @@ In held-out test data, missingness: income **1.805%**, loan term **0.062%**, sta
 - [Results](results/VERIFIED_RESULTS.md) — transcribed, numerically checked summaries
 - [Uploaded aggregate results](results/) — published aggregate CSV tables, including bootstrap, performance, demographic calibration, missingness and complete-case sensitivity; **no application-level records**
 - [Study figures](./) — four one-page PDF figures (Figure_1 through Figure_4) at repository root
+- [Figure 5 geographic denial-rate documentation](docs/FIGURE_5_GEOGRAPHY.md) — verified aggregate counts, descriptive rates and caption; anonymized PNG and source state CSV are not yet in this repository
 - [Local experiment manifest](docs/DTI_Excluded_Artifact_Manifest.csv) — filenames and hashes for locally archived artifacts, not the underlying files
 - [Reproducibility](docs/REPRODUCIBILITY.md) — verification status and limitations
 - [Local protocol inspection utility](R/inspect_local_training_metadata.R) — inspects recorded settings without exposing mortgage records
